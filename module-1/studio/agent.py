@@ -1,5 +1,6 @@
 from langchain_core.messages import SystemMessage
 from langchain_openai import AzureChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -37,6 +38,7 @@ def divide(a: int, b: int) -> float:
 tools = [add, multiply, divide]
 
 # Define LLM with bound tools
+
 llm = AzureChatOpenAI(api_version=os.getenv("AZURE_OPENAI_VERSION"), azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT"))
 llm_with_tools = llm.bind_tools(tools)
 
