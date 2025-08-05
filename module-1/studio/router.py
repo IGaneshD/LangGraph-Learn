@@ -2,7 +2,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import MessagesState
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode, tools_condition
-from langchain_openai import AzureChatOpenAI
+from utils.models import get_llm_by_user
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -19,7 +19,7 @@ def multiply(a: int, b: int) -> int:
     return a * b
 
 # LLM with bound tool
-llm = AzureChatOpenAI(api_version=os.getenv("AZURE_OPENAI_VERSION"), azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT"))
+llm = get_llm_by_user(get_default=False)
 llm_with_tools = llm.bind_tools([multiply])
 
 # Node

@@ -1,6 +1,5 @@
 from langchain_core.messages import SystemMessage
-from langchain_openai import AzureChatOpenAI
-from langchain_google_genai import ChatGoogleGenerativeAI
+from utils.models import get_llm_by_user
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -39,7 +38,7 @@ tools = [add, multiply, divide]
 
 # Define LLM with bound tools
 
-llm = AzureChatOpenAI(api_version=os.getenv("AZURE_OPENAI_VERSION"), azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT"))
+llm = get_llm_by_user(get_default=False)
 llm_with_tools = llm.bind_tools(tools)
 
 # System message
